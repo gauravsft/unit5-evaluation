@@ -9,6 +9,8 @@ async function createTasks() {
     try {
         let title = document.getElementById("queries").value;
         let status = document.getElementById("status").checked ;
+
+        console.log(status)
     
 
         let body = {

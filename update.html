@@ -24,7 +24,7 @@
             <input type="text" placeholder="Enter queries" id="queries">
             True :<input type="checkbox" id="status">
         </div>
-        <input type="button" value="ADD" id="add" onclick="updateTasks()">
+        <input type="button" value="UPDATE" id="add" onclick="updateTasks()">
 
     </div>
 </body>
@@ -33,7 +33,7 @@
     async function updateTasks() {
         try {
             let title = document.getElementById("queries").value;
-            let status = document.getElementById("status").value;
+            let status = document.getElementById("status").checked;
 
             let taskId = localStorage.getItem("taskId");
 
