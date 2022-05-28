@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Page</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            width: 20%;
+            margin: auto;
+            margin-top: 100px;
+            gap: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="up">
+            <input type="text" placeholder="Enter queries" id="queries">
+            True :<input type="checkbox" id="status">
+        </div>
+        <input type="button" value="ADD" id="add" onclick="updateTasks()">
+
+    </div>
+</body>
+
+<script>
+    async function updateTasks() {
+        try {
+            let title = document.getElementById("queries").value;
+            let status = document.getElementById("status").value;
+
+            let taskId = localStorage.getItem("taskId");
+
+            let resd = await fetch(`http://localhost:3000/tasks/${taskId}`);
+
+            let datad = await resd.json();
+
+            let body = {
+                title: title || datad.title,
+                status: status || datad.status,
+            }
+
+
+            let res = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+                method: "PATCH",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+            })
+            console.log(body)
+            let data = await res.json();
+            window.location.href = "index.html";
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+</script>
+
+</html>
+
+<!-- json-server --watch studentDatabase.json -->
